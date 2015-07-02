@@ -22,3 +22,5 @@ Stack.prototype.pop = function(){
     return result;
   }
 };
+
+var newStack = new Stack();
