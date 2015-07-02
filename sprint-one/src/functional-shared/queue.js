@@ -6,12 +6,29 @@ var Queue = function(){
   newQueue.count = 0;
   newQueue.last = 0;
   newQueue.position = 0;
-  _.extend(ne)
+  _.extend(newQueue, queueMethods);
 
   return newQueue;
 };
 
 var queueMethods = {};
 
+queueMethods.size = function(){
+  return this.count;
+};
 
+queueMethods.enqueue = function(value){
+  this.storage[this.position] = value;
+  this.count++;
+  this.position++;
+};
 
+queueMethods.dequeue = function(){
+  if (this.count > 0){
+    this.count--;
+    var result = this.storage[this.last];
+    delete this.storage[this.last];
+    this.last++;
+    return result;
+  }
+};
