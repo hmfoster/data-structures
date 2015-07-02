@@ -7,7 +7,7 @@ var Queue = function(){
   // Implement the methods below
   var count=0;
   var last = 0;
-  var position = 0
+  var position = 0;
   someInstance.enqueue = function(value){
     storage[position] = value;
     count++;
