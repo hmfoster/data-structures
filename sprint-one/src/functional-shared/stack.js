@@ -17,3 +17,12 @@ stackMethods.push = function(value){
   this.storage[this.count] = value; 
   this.count++;
 };
+
+stackMethods.pop = function(){
+  if (this.count > 0){
+    this.count--;
+    var result = this.storage[this.count];
+    delete this.storage[this.count];
+    return result;
+  }
+};
