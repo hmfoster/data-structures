@@ -8,13 +8,10 @@ var setPrototype = {};
 
 setPrototype.add = function(item){
   //add item
-    this._storage[item] = true;
-
-
+  this._storage[item] = true;
 };
 
 setPrototype.contains = function(item){
-  //look at each item in storage
   return !!this._storage[item];
 };
 

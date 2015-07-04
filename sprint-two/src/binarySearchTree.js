@@ -5,13 +5,9 @@ var BinarySearchTree = function(value){
 };
 
 BinarySearchTree.prototype.insert = function(value, node){
-  //if node == undefined 
-    //node = this.value
+  //if node == undefined, node = this
   node = node || this;
-  if (node === undefined){
-    debugger;
-  }
-  //check if node !== value
+  //check if node.value !== value
   if (node.value !== value){
     //check if value > node and .right = undefined
     if (value > node.value && node.right === undefined){
@@ -59,9 +55,8 @@ BinarySearchTree.prototype.contains = function(value, node){
 BinarySearchTree.prototype.depthFirstLog = function(callback, node){
   //run fun on node
   node = node || this;
-  debugger;
   callback(node.value);
-  //run fun on node.right check if undefined??
+  //run fun on node.right check if undefined
   if (node.right){
     this.depthFirstLog(callback, node.right);
   }
