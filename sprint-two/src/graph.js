@@ -1,5 +1,4 @@
 var Graph = function(){
-  this.vertex = null;
   this.vertices = [];
   this.edges = [];
 };
@@ -28,12 +27,33 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 
 Graph.prototype.addEdge = function(fromNode, toNode){
   this.edges.push([fromNode, toNode]);
+  this.edges.push([toNode, fromNode]);
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
+  var byeNode1 = null;
+  var byeNode2 = null;
+  for (var i = this.edges.length-1; i >= 0; i--) {
+    if (fromNode === this.edges[i][0] && toNode === this.edges[i][1]) {
+      byeNode1 = i;
+    } 
+    if (toNode === this.edges[i][0] && fromNode === this.edges[i][1]) {
+      byeNode2 = i;
+    } 
+  } 
+  if (byeNode1>byeNode2){
+    this.edges.splice(byeNode1,1);
+    this.edges.splice(byeNode2, 1);
+  } else { 
+    this.edges.splice(byeNode2, 1);
+    this.edges.splice(byeNode1,1);
+  }
 };
 
 Graph.prototype.forEachNode = function(cb){
+  _.each(this.vertices, function(node){
+    cb(node);
+  });
 };
 
 /*
