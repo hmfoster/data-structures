@@ -37,4 +37,14 @@ describe('binarySearchTree', function() {
     console.log(array);
     expect(array).to.eql([5,2,3]);
   });
+
+  it('should find the closest number in a list to a given value', function(){
+    var array = [1, 2, 3, 4, 6, 7, 10, 11, 12, 13, 14, 15];
+    expect(binarySearchTree.closestNumber(array, 9)).to.eql(10);
+  });
+
+  it('should find the closest number in a list to a given value (array)', function(){
+    var array = [1, 2, 3, 4, 6, 7, 10, 11, 12, 13, 14, 15];
+    expect(arrayClosestNumber(array, 9)).to.eql(10);
+  });
 });

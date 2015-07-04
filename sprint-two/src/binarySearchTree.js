@@ -1,4 +1,5 @@
 var BinarySearchTree = function(value){
+//lower is left, higher to right
   this.left = undefined;
   this.right = undefined;
   this.value = value;
@@ -66,6 +67,63 @@ BinarySearchTree.prototype.depthFirstLog = function(callback, node){
   }
 };
 
+BinarySearchTree.prototype.closestNumber = function(collection, value){
+  
+  var closestNumber ;
+  var smallestDifference ;
+
+  var context = this;
+
+  _.each(collection, function(item){
+    context.insert(item);
+  });
+
+  this.depthFirstLog(function(nodeValue){
+    if (nodeValue === value){
+      closestNumber = nodeValue;
+      return;
+    } else {
+      if (smallestDifference === undefined){
+        smallestDifference = Math.abs(value - nodeValue);
+        closestNumber = nodeValue;
+      } else if (Math.abs(value - nodeValue) < smallestDifference){
+        closestNumber = nodeValue;
+        smallestDifference = Math.abs(value - nodeValue);
+      }
+    }
+  });
+
+  return closestNumber;
+};
+
+var arrayClosestNumber = function(array, value){
+
+  var closestNumber;
+  var smallestDifference;
+
+  _.each(array, function(item){
+
+    if (item === value){
+      closestNumber = item;
+      return;
+    } else {
+      if (smallestDifference === undefined){
+        smallestDifference = Math.abs(value - item);
+        closestNumber = item;
+      } else if (Math.abs(value - item) < smallestDifference) {
+        closestNumber = item;
+        smallestDifference = Math.abs(value - item);
+      }
+    }
+
+  });
+
+  return closestNumber;
+};
+//write a function that takes a list and a number
+//turn the list into a binary search tree
+//run depthFirstLog, passing an a funciton that compares the number to target
+
 /*
  * Complexity: What is the time complexity of the above functions?
  .insert: O(log n)
@@ -73,4 +131,3 @@ BinarySearchTree.prototype.depthFirstLog = function(callback, node){
  .depthFirstLog: O(log n)
  */
 
-//lower is left (0), higher to right (1)
