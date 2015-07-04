@@ -11,24 +11,19 @@ BinarySearchTree.prototype.insert = function(value, node){
   //check if node.value !== value
   if (node.value !== value){
     //check if value > node and .right = undefined
-    if (value > node.value && node.right === undefined){
-      //add value to .right
-      node.right = new BinarySearchTree(value);
-    }
-    // else if value > node and .right != undefined
-    else if (value>node.value && node.right !== undefined){
-      //recur on .right node
-      this.insert(value, node.right);
-    }
-    //else if value < node and .left = undefined
-    else if (value < node.value && node.left === undefined){
-      //.left = value
-      node.left = new BinarySearchTree(value);
-    }
-    //else if value <node and .left != undefined
-    else if (value < node.value && node.left !== undefined){
-      //recur on .left
-      this.insert(value, node.left);
+          
+    if (value > node.value){
+      if (node.right){
+        this.insert(value, node.right);
+      } else {
+        node.right = new BinarySearchTree(value);
+      }
+    } else {
+      if (node.left){
+        this.insert(value, node.left);
+      } else {
+        node.left = new BinarySearchTree(value);
+      }
     }
   }
 };
@@ -36,19 +31,20 @@ BinarySearchTree.prototype.insert = function(value, node){
 BinarySearchTree.prototype.contains = function(value, node){
   node = node || this;
   if (node.value !== value){
-    if (value > node.value && node.right === undefined){
-      return false;
+    if (value > node.value){
+      if (node.right){
+        return this.contains(value, node.right);
+      } else {
+        return false;
+      }
+    } else {
+      if (node.left){
+        return this.contains(value, node.left);
+      } else {
+        return false;
+      }
     }
-    else if (value>node.value && node.right !== undefined){
-      return this.contains(value, node.right);
-    }
-    else if (value < node.value && node.left === undefined){
-      return false;
-    }
-    else if (value < node.value && node.left !== undefined){
-      return this.contains(value, node.left);
-    } 
-  } else{
+  } else {
     return true;
   }
 };
